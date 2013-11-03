@@ -79,9 +79,6 @@ int base64io_encode(BASE64IO* io, FILE* input, FILE* output)
 	output_buffer_len = ((io->chunk_buffer_size * 4) / 7);
 	input_buffer_len = input_buffer_len - (input_buffer_len % 3);
 	output_buffer_len = output_buffer_len - (output_buffer_len % 4);
-	//
-	// create pointers to input and output buffers
-	//
 	input_buffer = (unsigned char*) io->chunk_buffer;
 	output_buffer = io->chunk_buffer + input_buffer_len;
 	//
@@ -250,9 +247,6 @@ int base64io_decode(BASE64IO* io, FILE* input, FILE* output)
 	output_buffer_len = ((io->chunk_buffer_size * 3) / 7);
 	input_buffer_len = input_buffer_len - (input_buffer_len % 4);
 	output_buffer_len = output_buffer_len - (output_buffer_len % 3);
-	//
-	// create pointers to input and output buffers
-	//
 	input_buffer = io->chunk_buffer;
 	output_buffer = (unsigned char*) io->chunk_buffer + input_buffer_len;
 	//

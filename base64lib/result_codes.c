@@ -1,9 +1,4 @@
-#ifndef BASE64_RESULT_CODES
-#define BASE64_RESULT_COODES
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
+#include "result_codes.h"
 
 static char* base64_result_strings[] = {
 	"NO_RESULT",
@@ -22,10 +17,3 @@ char* base64_translate_result(int result)
 {
 	return base64_result_strings[result];
 }
-
-#if defined(__cplusplus)
-}
-#endif
-
-
-#endif
