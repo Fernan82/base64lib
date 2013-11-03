@@ -348,6 +348,10 @@
 			RelativePath=".\COPYRIGHT"
 			>
 		</File>
+		<File
+			RelativePath=".\readme.txt"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

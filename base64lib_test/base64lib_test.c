@@ -1,5 +1,23 @@
-// winTest.cpp : Defines the entry point for the application.
-//
+/*
+ * base64lib - Base64 Encoding/Decoding Library
+ * Copyright (C) 2013 Fernando Rodriguez
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
+
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -77,11 +95,12 @@ void onOK()
 	// prepare the base64io structure
 	//
 	io.chunk_buffer_size = 1024;	// set the working buffer size
-	io.chunk_buffer = 0;			// let library allocate buffer
+	io.chunk_buffer = buff;			// to let library allocate buffer set to 0
 	io.result = 0;					// clear result code
 	io.running = 0;					// clear the running flag
 	io.started = 0;					// clear started flag
 	io.abort_requested = 0;			// clear abort_requested flag
+	io.callback_function = 0;	// no callback
 
 	if (in = fopen(strInputFilename, "rb"))
 	{

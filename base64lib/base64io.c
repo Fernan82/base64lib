@@ -1,3 +1,23 @@
+/*
+ * base64lib - Base64 Encoding/Decoding Library
+ * Copyright (C) 2013 Fernando Rodriguez
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ */
+
 #include "base64io.h"
 
 #ifndef DISABLE_HEAP_ALLOCATION
@@ -24,6 +44,11 @@ int base64io_encode(BASE64IO* io, FILE* input, FILE* output)
 	io->bytes_processed = 0;
 	io->started = 1;
 	io->running = 1;
+	//
+	// do callback
+	//
+	if (io->callback_function)
+		io->callback_function((void*)io);
 	//
 	// if an abort has been requested abort
 	//
@@ -88,6 +113,11 @@ int base64io_encode(BASE64IO* io, FILE* input, FILE* output)
 	io->bytes_total = ftell(input);
 	rewind(input);
 	//
+	// do callback
+	//
+	if (io->callback_function)
+		io->callback_function((void*)io);
+	//
 	// read the file in chunks
 	//
 	while (len = bytes_read = fread(input_buffer, 1, input_buffer_len, input))
@@ -148,6 +178,11 @@ int base64io_encode(BASE64IO* io, FILE* input, FILE* output)
 			io->abort_requested = 0;
 			return io->result = BASE64IO_OPERATION_ABORTED;
 		}
+		//
+		// do callback
+		//
+		if (io->callback_function)
+			io->callback_function((void*)io);
 	}
 	//
 	// if the chunk buffer was allocated by this function
@@ -202,6 +237,11 @@ int base64io_decode(BASE64IO* io, FILE* input, FILE* output)
 	io->started = 1;
 	io->running = 1;
 	//
+	// do callback
+	//
+	if (io->callback_function)
+		io->callback_function((void*)io);
+	//
 	// checkk that the buffer is big enough
 	//
 	if (io->chunk_buffer_size < 7)
@@ -255,6 +295,11 @@ int base64io_decode(BASE64IO* io, FILE* input, FILE* output)
 	fseek(input, 0, SEEK_END);
 	io->bytes_total = ftell(input);
 	rewind(input);
+	//
+	// do callback
+	//
+	if (io->callback_function)
+		io->callback_function((void*)io);
 	//
 	// read the file in chunks
 	//
@@ -316,6 +361,11 @@ int base64io_decode(BASE64IO* io, FILE* input, FILE* output)
 			io->abort_requested = 0;
 			return io->result = BASE64IO_OPERATION_ABORTED;
 		}
+		//
+		// do callback
+		//
+		if (io->callback_function)
+			io->callback_function((void*)io);
 	}
 	//
 	// if the chunk buffer was allocated by this function

@@ -5,9 +5,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base64lib", "base64lib\base
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base64lib_test", "base64lib_test\base64lib_test.vcproj", "{EED965B7-7C01-4E3E-A77C-1A2CE77F9C5C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base64lib_console_test", "base64lib_console_test\base64lib_console_test.vcproj", "{64A5A19C-AC7B-4DAA-84E3-8A5B13B24AF0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A4AC60E8-08FE-49AC-845A-1060825E90AF} = {A4AC60E8-08FE-49AC-845A-1060825E90AF}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SourceCodeControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = base64lib\\base64lib.vcproj
 		SccLocalPath1 = .
@@ -15,6 +20,9 @@ Global
 		SccProjectUniqueName2 = base64lib_test\\base64lib_test.vcproj
 		SccLocalPath2 = .
 		SccProjectFilePathRelativizedFromConnection2 = base64lib_test\\
+		SccProjectUniqueName3 = base64lib_console_test\\base64lib_console_test.vcproj
+		SccLocalPath3 = .
+		SccProjectFilePathRelativizedFromConnection3 = base64lib_console_test\\
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +47,12 @@ Global
 		{EED965B7-7C01-4E3E-A77C-1A2CE77F9C5C}.Release|Win32.Build.0 = Release|Win32
 		{EED965B7-7C01-4E3E-A77C-1A2CE77F9C5C}.Release|x64.ActiveCfg = Release|x64
 		{EED965B7-7C01-4E3E-A77C-1A2CE77F9C5C}.Release|x64.Build.0 = Release|x64
+		{64A5A19C-AC7B-4DAA-84E3-8A5B13B24AF0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{64A5A19C-AC7B-4DAA-84E3-8A5B13B24AF0}.Debug|Win32.Build.0 = Debug|Win32
+		{64A5A19C-AC7B-4DAA-84E3-8A5B13B24AF0}.Debug|x64.ActiveCfg = Debug|Win32
+		{64A5A19C-AC7B-4DAA-84E3-8A5B13B24AF0}.Release|Win32.ActiveCfg = Release|Win32
+		{64A5A19C-AC7B-4DAA-84E3-8A5B13B24AF0}.Release|Win32.Build.0 = Release|Win32
+		{64A5A19C-AC7B-4DAA-84E3-8A5B13B24AF0}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
