@@ -1,0 +1,1 @@
+This is a Win32 appliction used to test base64lib. 
