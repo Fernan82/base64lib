@@ -20,10 +20,6 @@
 
 #include "base64io.h"
 
-#ifndef DISABLE_HEAP_ALLOCATION
-#include "malloc.h"
-#endif
-
 int base64io_encode(BASE64IO* io, FILE* input, FILE* output)
 {
 	size_t len;
@@ -120,7 +116,7 @@ int base64io_encode(BASE64IO* io, FILE* input, FILE* output)
 	//
 	// read the file in chunks
 	//
-	while (len = bytes_read = fread(input_buffer, 1, input_buffer_len, input))
+	while ((len = bytes_read = fread(input_buffer, 1, input_buffer_len, input)))
 	{
 		//
 		// encode the chunk
@@ -303,7 +299,7 @@ int base64io_decode(BASE64IO* io, FILE* input, FILE* output)
 	//
 	// read the file in chunks
 	//
-	while (len = bytes_read = fread(input_buffer, 1, input_buffer_len, input))
+	while ((len = bytes_read = fread(input_buffer, 1, input_buffer_len, input)))
 	{
 		//
 		// encode the chunk

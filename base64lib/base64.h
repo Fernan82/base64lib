@@ -49,6 +49,14 @@
 //
 //#define DISABLE_HEAP_ALLOCATION
 
+//
+// platform-specific definition of inline keyword
+//
+#define INLINE		inline
+#if defined(WIN32)
+#define INLINE		__inline
+#endif
+
 #if defined(__cplusplus)
 extern "C"
 {
@@ -83,7 +91,7 @@ int base64_decode(const char* data, size_t* const len, unsigned char** const out
 // Gets the size of the base64 encoder output for a given
 // input length including the null terminator
 //
-static __inline size_t base64_get_encoder_output_length(const size_t input_len)
+static INLINE size_t base64_get_encoder_output_length(const size_t input_len)
 {
 	return (size_t) (((input_len + 2) / 3) * 4);
 }
@@ -96,7 +104,7 @@ static __inline size_t base64_get_encoder_output_length(const size_t input_len)
 // shorter so use this only to allocate output buffers when allocating
 // your own buffers.
 //
-static __inline size_t base64_get_decoder_output_length(const size_t input_len)
+static INLINE size_t base64_get_decoder_output_length(const size_t input_len)
 {
 	return (input_len / 4) * 3;
 }

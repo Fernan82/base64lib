@@ -21,10 +21,10 @@
 
 #include "base64.h"
 
-#ifndef DISABLE_HEAP_ALLOCATION
-#include "malloc.h"
-#endif
-
+//
+// masks for obtaining each six bit segment
+// from a 24-bit word
+//
 #define SEXTET1		0xFFFFFFFF << 26 >> 0
 #define SEXTET2		0xFFFFFFFF << 26 >> 6
 #define SEXTET3		0xFFFFFFFF << 26 >> 12
@@ -204,20 +204,20 @@ int base64_decode(const char* data, size_t* const len, unsigned char** const out
 		//
 		// verify that we're working with valid base64 data
 		//		
-		if ((base64_reverse[data[i + 0]] | base64_reverse[data[i + 1]] |
-			base64_reverse[data[i + 2]] | base64_reverse[data[i + 3]]) == 0xFF)
+		if ((base64_reverse[(int)data[i + 0]] | base64_reverse[(int)data[i + 1]] |
+			base64_reverse[(int)data[i + 2]] | base64_reverse[(int)data[i + 3]]) == 0xFF)
 		{
 			if (i == *len - 4) 
 			{
 				if (data[i + 2] == '=' && data[i + 3] == '=')
 				{
-					if ((base64_reverse[data[i + 0]] | base64_reverse[data[i + 1]]) != 0xFF)
+					if ((base64_reverse[(int)data[i + 0]] | base64_reverse[(int)data[i + 1]]) != 0xFF)
 						goto validation_passed;
 				}
 				else if (data[i + 3] == '=')
 				{
-					if ((base64_reverse[data[i + 0]] | base64_reverse[data[i + 1]] |
-						base64_reverse[data[i + 2]]) != 0xFF) goto validation_passed;
+					if ((base64_reverse[(int)data[i + 0]] | base64_reverse[(int)data[i + 1]] |
+						base64_reverse[(int)data[i + 2]]) != 0xFF) goto validation_passed;
 				}
 			}
 			#if !defined(DISABLE_HEAP_ALLOCATION)
@@ -245,10 +245,10 @@ int base64_decode(const char* data, size_t* const len, unsigned char** const out
 		// and copy them to the appropiate bits on the segment
 		// variable
 		//
-        segment |= base64_reverse[data[i + 0]] << 26;
-        segment |= base64_reverse[data[i + 1]] << 20;
-        segment |= base64_reverse[data[i + 2]] << 14;
-        segment |= base64_reverse[data[i + 3]] << 8;
+        segment |= ((uint32_t)base64_reverse[(int)data[i + 0]]) << 26;
+        segment |= ((uint32_t)base64_reverse[(int)data[i + 1]]) << 20;
+        segment |= ((uint32_t)base64_reverse[(int)data[i + 2]]) << 14;
+        segment |= ((uint32_t)base64_reverse[(int)data[i + 3]]) << 8;
 		//
 		// copy the relevant bits to the output buffer
 		//
