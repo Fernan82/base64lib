@@ -216,4 +216,5 @@ pip-log.txt
 
 # mplab
 *.o
+*.a
 pic/
